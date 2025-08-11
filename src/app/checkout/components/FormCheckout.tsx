@@ -73,6 +73,7 @@ const CheckoutForm = () => {
           <Input
             type="radio"
             value="PIX"
+            {...paymentRegister}
             checked={paymentMethod === "PIX"}
             onChange={(e) => {
               setPaymentMethod(e.target.value as FormData["paymentMethod"]);
@@ -85,14 +86,12 @@ const CheckoutForm = () => {
           <Input
             type="radio"
             value="CARD"
-            name={paymentRegister.name}
-            ref={paymentRegister.ref}
+            {...paymentRegister}
             checked={paymentMethod === "CARD"}
             onChange={(e) => {
               setPaymentMethod(e.target.value as FormData["paymentMethod"]);
               paymentRegister.onChange(e);
             }}
-            onBlur={paymentRegister.onBlur}
           />
           <p className="px-2">Parcelas</p>
         </div>
@@ -102,9 +101,7 @@ const CheckoutForm = () => {
         <div className="mb-4 mt-2">
           <Select
             label="Parcelas"
-            id="parcelas"
-            name={parcelasRegister.name}
-            ref={parcelasRegister.ref}
+            {...parcelasRegister}
             value={selectedInstallments}
             onChange={(e) => {
               const num = Number(e.target.value);
