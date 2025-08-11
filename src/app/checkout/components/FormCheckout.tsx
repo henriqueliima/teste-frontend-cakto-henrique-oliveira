@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
+import { Select } from "@/components/Select/Select";
 import { Controller } from "react-hook-form";
 import { IMaskInput } from "react-imask";
 import { productMock } from "@/mocks/productMock";
@@ -99,10 +100,8 @@ const CheckoutForm = () => {
 
       {paymentMethod === "CARD" && (
         <div className="mb-4 mt-2">
-          <label className="font-semibold" htmlFor="parcelas">
-            Parcelas
-          </label>
-          <select
+          <Select
+            label="Parcelas"
             id="parcelas"
             name={parcelasRegister.name}
             ref={parcelasRegister.ref}
@@ -112,17 +111,12 @@ const CheckoutForm = () => {
               setSelectedInstallments(num);
               parcelasRegister.onChange(e);
             }}
-            className="border border-[#919EAB33] ease-in-out duration-150 focus:ring-1 outline-none rounded-md shadow-sm transition w-full focus:ring-white px-3 py-2 text-sm"
-          >
-            {Array.from({ length: 12 }, (_, i) => i + 1).map((num) => (
-              <option key={num} value={num}>
-                {num}x
-              </option>
-            ))}
-          </select>
-          {errors.parcelas && (
-            <p className="text-red-600 text-sm">{errors.parcelas.message}</p>
-          )}
+            options={Array.from({ length: 12 }, (_, i) => i + 1).map((num) => ({
+              value: num,
+              label: `${num}x`,
+            }))}
+            errorMessage={errors.parcelas?.message}
+          />
         </div>
       )}
 

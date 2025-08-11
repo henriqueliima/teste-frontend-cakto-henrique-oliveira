@@ -1,4 +1,4 @@
-export const productMock = {
+  export const productMock = {
   id: 1,
   name: "Curso de Marketing Digital 2025",
   originalPrice: 497.0,
